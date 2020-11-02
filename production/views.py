@@ -10,7 +10,8 @@ import seaborn as sns
 sns.set(style="white")
 sns.set(style="whitegrid", color_codes=True)
 def ploting(request) :
-    data=pd.read_csv("/home/predictcrop/crop_predict/production/apy.csv")
+    data=pd.read_csv("/home/predictcrop/crop_predict/production/Crop Production With Rainfall.csv")
+    rain=pd.read_csv("/home/predictcrop/crop_predict/production/Rainfall Predicted.csv")
     data=data.dropna()
     inp=str(request.GET['inp']).split('@')
     dis=inp[0]
@@ -20,6 +21,7 @@ def ploting(request) :
     for x in s:
         if season.title() in x:
             sin=s.index(x)
+    state=list(data[data["District_Name"]==dis.upper()]["State_Name"][:1])[0]
     data_cu=data[data["District_Name"]==dis.upper()][data["Season"]==s[sin]]
     data1 = data_cu.drop(["State_Name","Crop_Year"],axis=1)
     data_dum = pd.get_dummies(data1)
@@ -39,6 +41,7 @@ def ploting(request) :
     crdata= {'Crop': list(crname),
             'Production': list(predict)}
     crpro = pd.DataFrame(crdata)
+    ch["Rainfall"]=list(rain[rain["State_Name"]==state]["Rainfall"])[0]gi
     crpro=crpro.sort_values(by=['Production'], ascending=False)
     print(crpro)
     fig=plt.figure()
