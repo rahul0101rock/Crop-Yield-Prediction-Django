@@ -41,7 +41,7 @@ def ploting(request) :
     crdata= {'Crop': list(crname),
             'Production': list(predict)}
     crpro = pd.DataFrame(crdata)
-    ch["Rainfall"]=list(rain[rain["State_Name"]==state]["Rainfall"])[0]gi
+    ch["Rainfall"]=list(rain[rain["State_Name"]==state]["Rainfall"])[0]
     crpro=crpro.sort_values(by=['Production'], ascending=False)
     print(crpro)
     fig=plt.figure()
