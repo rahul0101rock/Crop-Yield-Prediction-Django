@@ -10,7 +10,7 @@ import seaborn as sns
 sns.set(style="white")
 sns.set(style="whitegrid", color_codes=True)
 def ploting(request) :
-    data=pd.read_csv("/home/predictcrop/crop_predict/production/Crop Production With Rainfall.csv")
+    data=pd.read_csv("/home/predictcrop/crop_predict/production/Crop_Production_with_rainfall.csv")
     rain=pd.read_csv("/home/predictcrop/crop_predict/production/Rainfall Predicted.csv")
     data=data.dropna()
     inp=str(request.GET['inp']).split('@')
