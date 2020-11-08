@@ -53,6 +53,5 @@ def ploting(request) :
     ax.bar(list(crpro["Crop"])[:5], list(crpro["Production"])[:5])
     plt.savefig('static/plot.png', bbox_inches='tight')
     response="""<html><head>
-    <meta http-equiv="refresh" content="0; URL=http://predictcrop.pythonanywhere.com/static/plot.png" />
-    </head></html>"""
+    </head><body><a href="http://predictcrop.pythonanywhere.com/static/plot.png">Graph</a></body></html>"""
     return HttpResponse(response)
