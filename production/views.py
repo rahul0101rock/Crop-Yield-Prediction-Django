@@ -1,10 +1,7 @@
 from django.http import HttpResponse
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib import pylab
 plt.rc("font", size=14)
-import PIL, PIL.Image
-from io import StringIO
 from sklearn.ensemble import RandomForestRegressor
 import seaborn as sns
 sns.set(style="white")
@@ -45,13 +42,13 @@ def ploting(request) :
     crpro=crpro.sort_values(by=['Production'], ascending=False)
     print(crpro)
     fig=plt.figure()
+    fig.patch.set_alpha(0)
     ax = fig.add_axes([0,0,1,1])
-    tstr='Predicted Production in        District: '+dis.title()+'      Season: '+season.title()
+    tstr='Production in Tones       District: '+dis.title()+'      Season: '+season.title()
     ax.set_title(tstr,fontsize=15)
-    ax.set_ylabel('Production in Tones', fontsize=14)
-    ax.set_xlabel('Crop', fontsize=13)
+    ax.patch.set_alpha(0)
     ax.bar(list(crpro["Crop"])[:5], list(crpro["Production"])[:5])
     plt.savefig('static/plot.png', bbox_inches='tight')
     response="""<html><head>
-    </head><body><a href="http://predictcrop.pythonanywhere.com/static/plot.png">Graph</a></body></html>"""
+    </head><body><a href="http://predictcrop.pythonanywhere.com/static/plot.png">Graph</a></html>"""
     return HttpResponse(response)
